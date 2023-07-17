@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 import streamlit as st
 from PyPDF2 import PdfReader
@@ -11,6 +12,8 @@ from langchain.llms import OpenAI
 from langchain.callbacks import get_openai_callback
 
 #langchain.verbose = False
+
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 
 def main():
