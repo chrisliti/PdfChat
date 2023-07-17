@@ -1,4 +1,4 @@
-dotenv
+python-dotenv
 streamlit 
 PyPDF2
 langchain
