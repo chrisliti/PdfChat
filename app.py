@@ -1,6 +1,8 @@
 import streamlit as st
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
+import langchain
+langchain.verbose = False
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings#, HuggingFaceInstructEmbeddings
 from langchain.vectorstores import FAISS
@@ -9,11 +11,13 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from htmlTemplates import css, bot_template, user_template
 
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+
 
 
 def get_conversation_chain(vector_store):
 
-    llm = ChatOpenAI(temperature=0)
+    llm = ChatOpenAI()
 
     memory = ConversationBufferMemory(memory_key = 'chat_history',return_messages=True)
 
