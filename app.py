@@ -12,7 +12,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from htmlTemplates import css, bot_template, user_template
 
-os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+#os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 
 
@@ -74,22 +74,16 @@ def get_pdf_text(pdf_docs):
     return text
 
 def handle_userinput(user_question):
-
-    response = st.session_state.conversation({'question':user_question})
-
+    response = st.session_state.conversation({'question': user_question})
     st.session_state.chat_history = response['chat_history']
 
     for i, message in enumerate(st.session_state.chat_history):
-
         if i % 2 == 0:
-
-            st.write(user_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
-
+            st.write(user_template.replace(
+                "{{MSG}}", message.content), unsafe_allow_html=True)
         else:
-
-            st.write(bot_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
-
-
+            st.write(bot_template.replace(
+                "{{MSG}}", message.content), unsafe_allow_html=True)
 
 
 
